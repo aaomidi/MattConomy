@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin implements Listener {
 	
 	public int CurrentBalance(Player p) {
-		int currentbalance = getConfig().getInt(p.getUniqueId() + ".Balance");
+		int currentbalance = getConfig().getInt(p.getUniqueId().toString() + ".Balance");
 		return currentbalance;
 	}
 
@@ -26,8 +26,8 @@ public class Main extends JavaPlugin implements Listener {
 		Player p = e.getPlayer();
 
 		if (!getConfig().contains(p.getName())) {
-			getConfig().set(p.getUniqueId() + ".Balance", 0.00);
-			getConfig().set(p.getUniqueId() + ".Minecraft name", p.getName());
+			getConfig().set(p.getUniqueId().toString() + ".Balance", 0.00);
+			getConfig().set(p.getUniqueId().toString() + ".Minecraft name", p.getName());
 		}
 	}
 
@@ -52,8 +52,8 @@ public class Main extends JavaPlugin implements Listener {
 	}
 
 	public void giveMoney(Player p, int i) {
-		getConfig().set(p.getUniqueId() + ".Balance",
-				getConfig().getInt(p.getUniqueId() + ".Balance", 0) + i);
+		getConfig().set(p.getUniqueId().toString() + ".Balance",
+				getConfig().getInt(p.getUniqueId().toString() + ".Balance", 0) + i);
 		saveConfig();
 		
 		
@@ -62,8 +62,8 @@ public class Main extends JavaPlugin implements Listener {
 	}
 
 	public void takeMoney(Player p, int i) {
-		getConfig().set(p.getUniqueId() + ".Balance",
-				getConfig().getInt(p.getUniqueId() + ".Balance", 0) - i);
+		getConfig().set(p.getUniqueId().toString() + ".Balance",
+				getConfig().getInt(p.getUniqueId().toString() + ".Balance", 0) - i);
 		saveConfig();
 		
 		
