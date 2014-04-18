@@ -1,0 +1,13 @@
+name: MattConomy
+main: me.matthijs110.MattConomy.Main
+version: 1.0
+author: matthijs110
+
+commands:
+ givemoney:
+    description: Adds 200 dollars to your balance
+ takemoney:
+    description: Takes 200 dollars from your balance
+ money:
+    description: shows your balance
+    
