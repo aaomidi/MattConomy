@@ -36,14 +36,17 @@ public class Main extends JavaPlugin implements Listener {
 
 		if (cmd.getName().equalsIgnoreCase("givemoney")) {
 			giveMoney(p, 200);
+			System.out.print(p.getName() + "'s new balance is " + CurrentBalance(p));
 		}
 		
 		if (cmd.getName().equalsIgnoreCase("takemoney")) {
 			takeMoney(p, 200);
+			System.out.print(p.getName() + "'s new balance is " + CurrentBalance(p));
 		}
 		
 		if (cmd.getName().equalsIgnoreCase("money")) {
 			getBalance(p);
+			System.out.print(p.getName() + "'s new balance is " + CurrentBalance(p));
 		}
 		return false;
 	}
