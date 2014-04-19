@@ -1,9 +1,10 @@
 package me.matthijs110.MattConomy;
 
+import me.matthijs110.MattConomy.Commands.GiveMoney;
+import me.matthijs110.MattConomy.Commands.Money;
+import me.matthijs110.MattConomy.Commands.TakeMoney;
+
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,14 +12,20 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener {
-	
-	public int CurrentBalance(Player p) {
-		int currentbalance = getConfig().getInt(p.getUniqueId().toString() + ".Balance");
-		return currentbalance;
-	}
 
 	public void onEnable() {
+		RegisterEvents();
+		RegisterCommands();
+	}
+	
+	public void RegisterEvents() {
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
+	}
+	
+	public void RegisterCommands() {
+		getCommand("money").setExecutor(new Money());
+		getCommand("givemoney").setExecutor(new GiveMoney());
+		getCommand("takemoney").setExecutor(new TakeMoney());
 	}
 
 	@EventHandler
@@ -31,47 +38,4 @@ public class Main extends JavaPlugin implements Listener {
 		}
 	}
 
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		Player p = (Player) sender;
-
-		if (cmd.getName().equalsIgnoreCase("givemoney")) {
-			giveMoney(p, 200);
-			System.out.print(p.getName() + "'s new balance is " + CurrentBalance(p));
-		}
-		
-		if (cmd.getName().equalsIgnoreCase("takemoney")) {
-			takeMoney(p, 200);
-			System.out.print(p.getName() + "'s new balance is " + CurrentBalance(p));
-		}
-		
-		if (cmd.getName().equalsIgnoreCase("money")) {
-			getBalance(p);
-			System.out.print(p.getName() + "'s new balance is " + CurrentBalance(p));
-		}
-		return false;
-	}
-
-	public void giveMoney(Player p, int i) {
-		getConfig().set(p.getUniqueId().toString() + ".Balance",
-				getConfig().getInt(p.getUniqueId().toString() + ".Balance", 0) + i);
-		saveConfig();
-		
-		
-		p.sendMessage(ChatColor.GREEN + "+ " + ChatColor.GOLD + "$" + i + ".00");
-		p.sendMessage(ChatColor.GREEN + "Your new balance is " + ChatColor.YELLOW + "$" + CurrentBalance(p));
-	}
-
-	public void takeMoney(Player p, int i) {
-		getConfig().set(p.getUniqueId().toString() + ".Balance",
-				getConfig().getInt(p.getUniqueId().toString() + ".Balance", 0) - i);
-		saveConfig();
-		
-		
-		p.sendMessage(ChatColor.RED + "- " + ChatColor.GOLD + "$" + i + ".00");
-		p.sendMessage(ChatColor.GREEN + "Your new balance is " + ChatColor.YELLOW + "$" + CurrentBalance(p));
-	}
-	
-	public void getBalance(Player p) {
-		p.sendMessage(ChatColor.GOLD + "Your current balance is " + ChatColor.YELLOW + "$" + CurrentBalance(p));
-	}
 }
