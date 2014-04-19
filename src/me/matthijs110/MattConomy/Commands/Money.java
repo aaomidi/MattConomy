@@ -14,7 +14,6 @@ public class Money implements CommandExecutor {
 		
 		if (cmd.getName().equalsIgnoreCase("money")) {
 			API.getBalance(p);
-			System.out.print(p.getName() + "'s new balance is " + API.CurrentBalance(p));
 		}
 		return false;
 	}
