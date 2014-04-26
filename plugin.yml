@@ -9,5 +9,6 @@ commands:
  takemoney:
     description: Takes 200 dollars from your balance
  money:
-    description: shows your balance
+    description: shows your or the others balance balance
+    aliases: [balance]
     

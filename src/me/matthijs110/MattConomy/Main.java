@@ -68,5 +68,4 @@ public class Main extends JavaPlugin implements Listener {
 			config.set(Main.getUUID(p) + ".Minecraft name", p.getName());
 		}
 	}
-
 }
